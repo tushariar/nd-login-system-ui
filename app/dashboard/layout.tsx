@@ -1,5 +1,4 @@
 import {
-    Bell,
     CircleUser,
     Menu,
     Package2
@@ -12,10 +11,7 @@ import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+    DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
@@ -31,10 +27,6 @@ export default function AuthenticatedLayout({ children }: {
                             <Package2 className="h-6 w-6" />
                             <span className="">Login System</span>
                         </Link>
-                        <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-                            <Bell className="h-4 w-4" />
-                            <span className="sr-only">Toggle notifications</span>
-                        </Button>
                     </div>
                     <div className="flex-1">
                         <DesktopMenus />
