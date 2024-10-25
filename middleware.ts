@@ -1,9 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkPermission } from "./lib/auth";
+import x_axios from "./lib/axios";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("jwt")?.value;
   const { pathname } = req.nextUrl;
+
+  if (pathname === "/signup/confirm") {
+    try {
+      const url = req.nextUrl;
+      const email = url.searchParams.get("email");
+      const token = url.searchParams.get("token");
+
+      if (!email || !token) {
+        return NextResponse.redirect(
+          new URL("/signup/confirm/failed", req.url)
+        );
+      }
+
+      await x_axios.post("/auth/signup/confirm", { email, token });
+
+      return NextResponse.redirect(new URL("/signup/confirm/success", req.url));
+    } catch (error) {
+      return NextResponse.redirect(new URL("/signup/confirm/failed", req.url));
+    }
+  }
 
   if (!token) {
     if (pathname.startsWith("/dashboard")) {
@@ -55,5 +76,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/", "/recovery"],
+  matcher: ["/dashboard/:path*", "/", "/recovery", "/signup/confirm"],
 };

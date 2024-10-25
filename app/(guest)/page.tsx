@@ -69,6 +69,14 @@ export default function Login() {
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? "Logging in..." : "Login"}
           </Button>
+          <p className="text-sm text-center">
+            Don't have an account?
+          </p>
+          <Button variant={"secondary"} asChild>
+            <Link href="/signup" >
+              Sign Up
+            </Link>
+          </Button>
         </div>
       </form>
     </div>
